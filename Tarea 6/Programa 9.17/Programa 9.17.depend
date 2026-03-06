@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1772744235 source:c:\users\dell\desktop\programacion para mecatronicos 2026\javierbonilla_pm_2026_c1\tarea 6\programa 9.17\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
