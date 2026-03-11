@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void ordenar(FILE *);
+void ordenar(FILE *, int);
 
 int main()
 {
@@ -19,8 +19,6 @@ int main()
     printf("\nEscriba cuantos numeros va a generar: ");
     scanf("%d", &n);
 
-    fprintf(ar, "%d\n", n);
-
     for (j=0; j<=n; j++)
     {
         int numal = rand() % (max - min + 1) + min;
@@ -34,9 +32,7 @@ int main()
     fclose(ar);
     }
 
-    if ((ar = fopen("archivo.txt", "r+")) != NULL)
-        ordenar(ar);
-    fclose(ar);
+    ordenar(ar, n);
     /*
     La funcion ordenar lee los datos del archivo y los ordena utilizando el algoritmo
     bubblesort. Tambien se supone que agrega los numeros ordenados al final del
@@ -46,10 +42,11 @@ int main()
 }
 
 
-void ordenar(FILE *ar)
+void ordenar(FILE *ar, int n)
 {
-    int n, j, *i, cambio, buffer;
-        fscanf(ar, "%d", &n);
+    int j, *i, cambio, buffer;
+    if ((ar = fopen("archivo.txt", "r+")) != NULL)
+    {
         i = (int *)malloc(n * sizeof(int));
         printf("\n\n");
 
@@ -75,10 +72,16 @@ void ordenar(FILE *ar)
             }
         }
         printf("\n---------------------------------------------");
+        fprintf(ar, "\n---------------------------------------------");
   for (j = 0; j <= n-1; j++)
   {
-    printf("\nElementO %d: %d", j, i[j]);
-    fprintf(ar, "\nElementO %d: %d", j, i[j]);
+    printf("\nElemento %d: %d", j+1, i[j]);
+    fprintf(ar, "\nElemento %d: %d", j+1, i[j]);
   }
   free(i);
+    }
+    else{
+        printf("\nNo se puede abrir el archivo");
+    }
+    fclose(ar);
 }
